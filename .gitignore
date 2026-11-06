@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# KiCad local files
+hardware/.history/
+*.kicad_prl
+*-backups/
+fp-info-cache
+*.lck

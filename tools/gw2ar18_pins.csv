@@ -1,0 +1,843 @@
+Date,Version,Description
+09/02/2016,1.0E,Initial version published.
+03/282019,1.1E,The info. of EQ176 package added.
+03/10/2020,1.2E,The descriptions of pin MODE0/MODE1/MODE2 improved.
+06/30/2020,1.2.1E,QN88/EQ144 package embedded with PSRAM renamed QN88P/EQ144P.
+08/07/2020,1.3E,The info. of QN88PF and EQ144PF packages added. The power supply pin in package LQ176 and EQ176 modified.
+04/22/2021,1.4E,The info. of PG256S package added.
+10/25/2021,1.5E,Pin definitions updated.
+08/12/2022,1.6E,The info. of PG256S package removed.
+10/20/2022,1.6.1E,The note in Power sheet updated. The note in Pin Definitions sheet updated.
+03/10/2023,1.7E,LQ176 and LQ144 packages removed. The note of EQ144/QN88/EQ176/QN88P/EQ144P/EQ144PF/QN88PF package in Power sheet added. The description of CLKHOLD N pin in Pin Definitions sheet updated. _
+06/30/2023,1.7.1E,"The descriptions of pin definitions and info. for MODE0, MODE1, MODE2 pins optimized."
+11/15/2024,1.7.2E,The descriptions of EPAD pin in Pin Definitions sheet added. The descriptions of EXTR pin in Pin Definitions sheet optimized. The I/O descriptions of Ready and Done pins in Pin Definitions sheet optimized.
+User I/O,,
+IO[End][Row/Column Number][A/B],I/O,"[End] indicates the pin location, including L(left), R(right), B(bottom), and T(top)."
+Multi-Function Pins,,
+IO[End][Row/Column Number][A/B]/MMM,,"/MMM represents one or more of the other functions in addition to being general purpose user I/O. When these functions are not in use, these pins can be used as user I/O."
+D0,I/O,Data port D0 in CPU mode
+D1,I/O,Data port D1 in CPU mode
+D2,I/O,Data port D2 in CPU mode
+D3,I/O,Data port D3 in CPU mode
+D4,I/O,Data port D4 in CPU mode
+D5,I/O,Data port D5 in CPU mode
+D6,I/O,Data port D6 in CPU mode
+D7,I/O,Data port D7 in CPU mode
+WE N _,I,Select data input/output of D[7:0] in CPU mode.0: Write;1: Read.
+DOUT,O,Data output in SERIAL mode
+DIN,"I, internal weak pull-up",Data input in SERIAL mode
+TMS,"I, internal weak pull-up",Serial mode input in JTAG mode
+TCK,I,Serial clock input in JTAG mode
+TDO,O,Serial data output in JTAG mode
+TDI,"I, internal weak pull-up",Serial data input in JTAG mode
+JTAGSEL N,"I, internal weak pull-up",Reconfigure JTAG download function signal
+_ RECONFIG N _,"I, internal weak pull-up","Global reset GowinCONFIG logic signal, active low"
+FASTRD N _,I,"Access SPI FLASH to select signal. Low, Fast Read mode; High, Read mode."
+DONE[1],"O, internal weak pull-up","High, the programming configuration has been completed successfully; Low, the programming configuration has not been completed or failed."
+READY[1],"I/O, internal weak pull-up","High, the device can be programmed and configured currently; Low, the device cannot be programmed and configured currently."
+MI,I,MI in MSPI mode
+MO,O,MO in MSPI mode
+MCS N _,O,"Enable signal MCS N in MSPI mode, active-low _"
+MCLK,O,"Clock output MCLK in MSPI mode, with default frequency of 2.5Mhz"
+SCLK,I,"Clock input in SSPI, SERIAL, and CPU modes"
+SO,O,SO in SSPI mode
+SI,I/O,SI in SSPI mode
+SSPI CS N,I/O,"Enable signal SSPI CS N in SSPI mode, active-low, and internal weak pull-up"
+_ _ CLKHOLD N _,"I, internal weak pull-up",_ _ Active-high in SSPI mode; Active-low in CPU mode.
+GCLKC [x] _,I,"Differential input pin of GCLKT [x], C(Comp), [x] is global clock number[2]"
+GCLKT [x] _,I,"_ Global clock input pin, T(True), [x] is global clock number"
+LPLL C fb/RPLL C fb,I,"Left/Right PLL feedback input pin, C(Comp)"
+_ _ _ _ LPLL T fb/RPLL T fb,I,"Left/Right PLL feedback input pin, T(True)"
+_ _ _ _ LPLL C in/RPLL C in,I,"Left/Right PLL clock input pin, C(Comp)"
+_ _ _ _ LPLL T in/RPLL T in,I,"Left/Right PLL clock input pin, T(True)"
+_ _ _ _ MODE2,"I, internal weak pull-up","GowinCONFIG modes selection pin; if this pin is marked as “VCCIO”, it's internally powered; if this pin is marked as ""GND"", it's internally grounded."
+MODE1,"I, internal weak pull-up","GowinCONFIG modes selection pin; if this pin is marked as “VCCIO”, it's internally powered; if this pin is marked as ""GND"", it's internally grounded."
+MODE0,"I, internal weak pull-up","GowinCONFIG modes selection pin; if this pin is marked as “VCCIO”, it's internally powered; if this pin is marked as ""GND"", it's internally grounded."
+Other Pins,,
+EXTR,NA,"Dedicated pin to provide reference voltage for internal circuits, must be connected to an external 10K 1% resistor to ground."
+NC,NA,Reserved
+VSS,NA,Ground
+VCC,NA,Power supply pin of core voltage
+VCCIO#,NA,Power supply pin of I/O voltage for I/O BANK#
+VCCX,NA,Power supply pin of auxiliary voltage
+VCCPLLL0/1,NA,"Left PLL0/1 voltage supply pin, LQFP is separately packaged."
+VCCPLLR0/1,NA,"Right PLL0/1 voltage supply pin, LQFP is separately packaged."
+VCCPLLL,NA,Package PBGA: Left PLL0/1 voltage supply pin
+VCCPLLR,NA,Package PBGA: Right PLL0/1 voltage supply pin
+EPAD,NA,Exposed pad. Connect to ground.
+"Note! [1] The default state of READY/DONE is open-drain output, internal weak pull-up. DONE outputs 0 during configuration. [2] When the input is single-ended, GCLKC [x] pin is not a global clock pin. _",,
+IO Bank7,,,,IO Bank2
+IO Bank6,,,,IO Bank3
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+EXTR,Ground,,N/A,,,,47,75,91,47,75,75,47
+IOB12A,I/O,DQ5,5,,True of IOB12B,TRUE,,44,53,,44,44,
+IOB12B,I/O,DQ5,5,,_ _ Comp of IOB12A,TRUE,,45,54,,45,45,
+IOB13A,I/O,DQ5,5,,_ _ True of IOB13B,NONE,,,,,,,
+IOB13B,I/O,DQ5,5,,_ _ Comp of IOB13A,NONE,,,,,,,
+IOB14A,I/O,DQ5,5,,_ _ True of IOB14B,TRUE,29,46,55,29,46,46,29
+IOB14B,I/O,DQ5,5,,_ _ Comp of IOB14A,TRUE,30,47,56,30,47,47,30
+IOB15A,I/O,DQ5,5,,_ _ True of IOB15B,NONE,,,,,,,
+IOB15B,I/O,DQ5,5,,_ _ Comp of IOB15A,NONE,,,,,,,
+IOB16A,I/O,DQ5,5,,_ _ True of IOB16B,TRUE,,,,,,,
+IOB16B,I/O,DQ5,5,,_ _ Comp of IOB16A,TRUE,,,,,,,
+IOB17A,I/O,DQ5,5,,_ _ True of IOB17B,NONE,,48,57,,48,48,
+IOB17B,I/O,DQ5,5,,_ _ Comp of IOB17A,NONE,,49,58,,49,49,
+IOB18A,I/O,DQ5,5,,_ _ True of IOB18B,TRUE,31,,59,31,,,31
+IOB18B,I/O,DQ5,5,,_ _ Comp of IOB18A,TRUE,32,,60,32,,,32
+IOB19A,I/O,DQ5,5,,_ _ True of IOB19B,NONE,,,,,,,
+IOB19B,I/O,DQ5,5,,_ _ Comp of IOB19A,NONE,,,,,,,
+IOB20A,I/O,DQ5,5,,_ _ True of IOB20B,TRUE,,50,,,50,50,
+IOB20B,I/O,DQ5,5,,_ _ Comp of IOB20A,TRUE,,51,,,51,51,
+IOB21A,I/O,DQS5,5,,_ _ True of IOB21B,NONE,,,61,,,,
+IOB21B,I/O,DQS5,5,,_ _ Comp of IOB21A,NONE,,,62,,,,
+IOB22A,I/O,DQ5,5,,_ _ True of IOB22B,TRUE,,52,,,52,52,
+IOB22B,I/O,DQ5,5,,_ _ Comp of IOB22A,TRUE,,54,,,54,54,
+IOB23A,I/O,DQ5,5,,_ _ True of IOB23B,NONE,,,,,,,
+IOB23B,I/O,DQ5,5,,_ _ Comp of IOB23A,NONE,,,,,,,
+IOB24A,I/O,DQ5,5,,_ _ True of IOB24B,TRUE,33,,,33,,,33
+IOB24B,I/O,DQ5,5,,_ _ Comp of IOB24A,TRUE,34,,,34,,,34
+IOB25A,I/O,DQ5,5,,_ _ True of IOB25B,NONE,,,,,,,
+IOB25B,I/O,DQ5,5,,_ _ Comp of IOB25A,NONE,,,,,,,
+IOB26A,I/O,DQ5,5,,_ _ True of IOB26B,TRUE,,,,,,,
+IOB26B,I/O,DQ5,5,,_ _ Comp of IOB26A,TRUE,,,,,,,
+IOB27A/GCLKT 5,I/O,DQ5,5,GCLKT 5,_ _ True of IOB27B,NONE,,,63,,,,
+_ IOB27B/GCLKC 5,I/O,DQ5,5,_ GCLKC 5,_ _ Comp of IOB27A,NONE,,,64,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOB2A,I/O,DQ4,5,,True of IOB2B,TRUE,,,,,,,
+IOB2B,I/O,DQ4,5,,_ _ Comp of IOB2A,TRUE,,,,,,,
+IOB30A/GCLKT 4,I/O,DQ6,4,GCLKT 4,_ _ True of IOB30B,TRUE,35,56,68,35,56,56,35
+_ IOB30B/GCLKC 4,I/O,DQ6,4,_ GCLKC 4,_ _ Comp of IOB30A,TRUE,36,57,69,36,57,57,36
+_ IOB31A,I/O,DQ6,4,_,_ _ True of IOB31B,NONE,,,,,,,
+IOB31B,I/O,DQ6,4,,_ _ Comp of IOB31A,NONE,,,,,,,
+IOB32A,I/O,DQ6,4,,_ _ True of IOB32B,TRUE,,,,,,,
+IOB32B,I/O,DQ6,4,,_ _ Comp of IOB32A,TRUE,,,,,,,
+IOB33A,I/O,DQ6,4,,_ _ True of IOB33B,NONE,,58,,,58,58,
+IOB33B,I/O,DQ6,4,,_ _ Comp of IOB33A,NONE,,59,,,59,59,
+IOB34A,I/O,DQ6,4,,_ _ True of IOB34B,TRUE,37,60,70,37,60,60,37
+IOB34B,I/O,DQ6,4,,_ _ Comp of IOB34A,TRUE,38,61,71,38,61,61,38
+IOB35A,I/O,DQ6,4,,_ _ True of IOB35B,NONE,,,,,,,
+IOB35B,I/O,DQ6,4,,_ _ Comp of IOB35A,NONE,,,,,,,
+IOB36A,I/O,DQ6,4,,_ _ True of IOB36B,TRUE,,,,,,,
+IOB36B,I/O,DQ6,4,,_ _ Comp of IOB36A,TRUE,,,,,,,
+IOB37A,I/O,DQS6,4,,_ _ True of IOB37B,NONE,,,72,,,,
+IOB37B,I/O,DQS6,4,,_ _ Comp of IOB37A,NONE,,,73,,,,
+IOB38A,I/O,DQ6,4,,_ _ True of IOB38B,TRUE,,62,74,,62,62,
+IOB38B,I/O,DQ6,4,,_ _ Comp of IOB38A,TRUE,,63,75,,63,63,
+IOB39A,I/O,DQ6,4,,_ _ True of IOB39B,NONE,,,,,,,
+IOB39B,I/O,DQ6,4,,_ _ Comp of IOB39A,NONE,,,,,,,
+IOB3A,I/O,DQ4,5,,_ _ True of IOB3B,NONE,,,,,,,
+IOB3B,I/O,DQ4,5,,_ _ Comp of IOB3A,NONE,,,,,,,
+IOB40A,I/O,DQ6,4,,_ _ True of IOB40B,TRUE,39,64,76,39,64,64,39
+IOB40B,I/O,DQ6,4,,_ _ Comp of IOB40A,TRUE,40,65,77,40,65,65,40
+IOB41A,I/O,DQ6,4,,_ _ True of IOB41B,NONE,,,,,,,
+IOB41B,I/O,DQ6,4,,_ _ Comp of IOB41A,NONE,,,,,,,
+IOB42A,I/O,DQ6,4,,_ _ True of IOB42B,TRUE,,66,78,,66,66,
+IOB42B,I/O,DQ6,4,,_ _ Comp of IOB42A,TRUE,42,67,79,42,67,67,42
+IOB43A,I/O,DQ6,4,,_ _ True of IOB43B,NONE,41,,,41,,,41
+IOB43B,I/O,DQ6,4,,_ _ Comp of IOB43A,NONE,,,,,,,
+IOB44A,I/O,DQ6,4,,_ _ True of IOB44B,TRUE,,,80,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOB44B,I/O,DQ6,4,,Comp of IOB44A,TRUE,,,81,,,,
+IOB45A,I/O,DQ6,4,,_ _ True of IOB45B,NONE,,,,,,,
+IOB45B,I/O,DQ6,4,,_ _ Comp of IOB45A,NONE,,,,,,,
+IOB48A,I/O,DQS7,4,,_ _ True of IOB48B,TRUE,,68,82,,68,68,
+IOB48B,I/O,DQS7,4,,_ _ Comp of IOB48A,TRUE,,69,83,,69,69,
+IOB49A,I/O,DQ7,4,,_ _ True of IOB49B,NONE,,,,,,,
+IOB49B,I/O,DQ7,4,,_ _ Comp of IOB49A,NONE,,,,,,,
+IOB4A,I/O,DQ4,5,,_ _ True of IOB4B,TRUE,,,,,,,
+IOB4B,I/O,DQ4,5,,_ _ Comp of IOB4A,TRUE,,,47,,,,
+IOB50A,I/O,DQ7,4,,_ _ True of IOB50B,TRUE,,,84,,,,
+IOB50B,I/O,DQ7,4,,_ _ Comp of IOB50A,TRUE,,,85,,,,
+IOB51A,I/O,DQ7,4,,_ _ True of IOB51B,NONE,,,,,,,
+IOB51B,I/O,DQ7,4,,_ _ Comp of IOB51A,NONE,,,,,,,
+IOB52A,I/O,DQ7,4,,_ _ True of IOB52B,TRUE,,,86,,,,
+IOB52B,I/O,DQ7,4,,_ _ Comp of IOB52A,TRUE,,,,,,,
+IOB53A,I/O,DQ7,4,,_ _ True of IOB53B,NONE,,70,,,70,70,
+IOB53B,I/O,DQ7,4,,_ _ Comp of IOB53A,NONE,,71,,,71,71,
+IOB54A,I/O,DQ7,4,,_ _ True of IOB54B,TRUE,,,,,,,
+IOB54B,I/O,DQ7,4,,_ _ Comp of IOB54A,TRUE,,,,,,,
+IOB55A,I/O,DQ7,4,,_ _ True of IOB55B,NONE,,,,,,,
+IOB55B,I/O,DQ7,4,,_ _ Comp of IOB55A,NONE,,72,,,72,72,
+IOB5A,I/O,DQ4,5,,_ _ True of IOB5B,NONE,,38,48,,38,38,
+IOB5B,I/O,DQ4,5,,_ _ Comp of IOB5A,NONE,,39,,,39,39,
+IOB6A,I/O,DQ4,5,,_ _ True of IOB6B,TRUE,25,40,49,25,40,40,25
+IOB6B,I/O,DQ4,5,,_ _ Comp of IOB6A,TRUE,26,41,50,26,41,41,26
+IOB7A,I/O,DQ4,5,,_ _ True of IOB7B,NONE,,42,,,42,42,
+IOB7B,I/O,DQ4,5,,_ _ Comp of IOB7A,NONE,,43,,,43,43,
+IOB8A,I/O,DQ4,5,,_ _ True of IOB8B,TRUE,27,,51,27,,,27
+IOB8B,I/O,DQ4,5,,_ _ Comp of IOB8A,TRUE,28,,52,28,,,28
+IOB9A,I/O,DQS4,5,,_ _ True of IOB9B,NONE,,,,,,,
+IOB9B,I/O,DQS4,5,,_ _ Comp of IOB9A,NONE,,,,,,,
+IOL11A,I/O,DQ1,7,,_ _ True of IOL11B,TRUE,,,6,,,,
+IOL11B,I/O,DQ1,7,,_ _ Comp of IOL11A,TRUE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOL12A,I/O,DQ1,7,,True of IOL12B,NONE,,,,,,,
+IOL12B,I/O,DQ1,7,,_ _ Comp of IOL12A,NONE,,,,,,,
+IOL13A,I/O,DQ1,7,,_ _ True of IOL13B,TRUE,,,,,,,
+IOL13B,I/O,DQ1,7,,_ _ Comp of IOL13A,TRUE,,,,,,,
+IOL14A,I/O,DQ1,7,,_ _ True of IOL14B,NONE,,,,,,,
+IOL14B,I/O,DQ1,7,,_ _ Comp of IOL14A,NONE,,,7,,,,
+IOL15A,I/O,DQ1,7,,_ _ True of IOL15B,TRUE,,,8,,,,
+IOL15B,I/O,DQ1,7,,_ _ Comp of IOL15A,TRUE,,,9,,,,
+IOL16A,I/O,DQ1,7,,_ _ True of IOL16B,NONE,,,,,,,
+IOL16B,I/O,DQ1,7,,_ _ Comp of IOL16A,NONE,,,,,,,
+IOL17A,I/O,DQ1,7,,_ _ True of IOL17B,TRUE,,,10,,,,
+IOL17B,I/O,DQ1,7,,_ _ Comp of IOL17A,TRUE,,,11,,,,
+IOL18A,I/O,DQ1,7,,_ _ True of IOL18B,NONE,,,12,,,,
+IOL18B,I/O,DQ1,7,,_ _ Comp of IOL18A,NONE,,,,,,,
+IOL20A,I/O,DQ1,7,,_ _ True of IOL20B,TRUE,,,,,,,
+IOL20B,I/O,DQ1,7,,_ _ Comp of IOL20A,TRUE,,,,,,,
+IOL21A,I/O,DQ1,7,,_ _ True of IOL21B,NONE,,,,,,,
+IOL21B,I/O,DQ1,7,,_ _ Comp of IOL21A,NONE,,,,,,,
+IOL22A,I/O,DQS1,7,,_ _ True of IOL22B,TRUE,,9,,,9,9,
+IOL22B,I/O,DQS1,7,,_ _ Comp of IOL22A,TRUE,,10,,,10,10,
+IOL23A,I/O,DQ1,7,,_ _ True of IOL23B,NONE,,,14,,,,
+IOL23B,I/O,DQ1,7,,_ _ Comp of IOL23A,NONE,,,,,,,
+IOL24A,I/O,DQ1,7,,_ _ True of IOL24B,TRUE,,,15,,,,
+IOL24B,I/O,DQ1,7,,_ _ Comp of IOL24A,TRUE,,,16,,,,
+IOL25A,I/O,DQ1,7,,_ _ True of IOL25B,NONE,,,,,,,
+IOL25B,I/O,DQ1,7,,_ _ Comp of IOL25A,NONE,,,18,,,,
+IOL26A,I/O,DQ1,7,,_ _ True of IOL26B,TRUE,,,17,,,,
+IOL26B,I/O,DQ1,7,,_ _ Comp of IOL26A,TRUE,,,19,,,,
+IOL27A/GCLKT 7,I/O,DQ1,7,GCLKT 7,_ _ True of IOL27B,NONE,,11,20,,11,11,
+_ IOL27B/GCLKC 7,I/O,DQ1,7,_ GCLKC 7,_ _ Comp of IOL27A,NONE,,12,21,,12,12,
+_ IOL29A/GCLKT 6,I/O,DQ2,6,_ GCLKT 6,_ _ True of IOL29B,TRUE,10,25,,10,25,25,10
+_ IOL29B/GCLKC 6,I/O,DQ2,6,_ GCLKC 6,_ _ Comp of IOL29A,TRUE,11,26,,11,26,26,11
+_ IOL2A,I/O,DQ0,7,_,_ _ True of IOL2B,TRUE,,3,3,,3,3,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOL2B,I/O,DQ0,7,,Comp of IOL2A,TRUE,,4,4,,4,4,
+IOL30A,I/O,DQ2,6,,_ _ True of IOL30B,NONE,,,,,,,
+IOL30B,I/O,DQ2,6,,_ _ Comp of IOL30A,NONE,,,,,,,
+IOL31A,I/O,DQ2,6,,_ _ True of IOL31B,TRUE,,,,,,,
+IOL31B,I/O,DQ2,6,,_ _ Comp of IOL31A,TRUE,,,,,,,
+IOL32A,I/O,DQ2,6,,_ _ True of IOL32B,NONE,,23,,,23,23,
+IOL32B,I/O,DQ2,6,,_ _ Comp of IOL32A,NONE,,24,,,24,24,
+IOL33A,I/O,DQ2,6,,_ _ True of IOL33B,TRUE,,27,,,27,27,
+IOL33B,I/O,DQ2,6,,_ _ Comp of IOL33A,TRUE,,28,,,28,28,
+IOL34A,I/O,DQ2,6,,_ _ True of IOL34B,NONE,,,,,,,
+IOL34B,I/O,DQ2,6,,_ _ Comp of IOL34A,NONE,,,,,,,
+IOL35A,I/O,DQ2,6,,_ _ True of IOL35B,TRUE,,,,,,,
+IOL35B,I/O,DQ2,6,,_ _ Comp of IOL35A,TRUE,,,,,,,
+IOL36A,I/O,DQS2,6,,_ _ True of IOL36B,NONE,,29,,,29,29,
+IOL36B,I/O,DQS2,6,,_ _ Comp of IOL36A,NONE,,30,,,30,30,
+IOL38A,I/O,DQ2,6,,_ _ True of IOL38B,TRUE,,,24,,,,
+IOL38B,I/O,DQ2,6,,_ _ Comp of IOL38A,TRUE,,,25,,,,
+IOL39A,I/O,DQ2,6,,_ _ True of IOL39B,NONE,,,,,,,
+IOL39B,I/O,DQ2,6,,_ _ Comp of IOL39A,NONE,,,,,,,
+IOL3A,I/O,DQ0,7,,_ _ True of IOL3B,NONE,,,,,,,
+IOL3B,I/O,DQ0,7,,_ _ Comp of IOL3A,NONE,,,,,,,
+IOL40A,I/O,DQ2,6,,_ _ True of IOL40B,TRUE,,,26,,,,
+IOL40B,I/O,DQ2,6,,_ _ Comp of IOL40A,TRUE,,,27,,,,
+IOL41A,I/O,DQ2,6,,_ _ True of IOL41B,NONE,,,,,,,
+IOL41B,I/O,DQ2,6,,_ _ Comp of IOL41A,NONE,,,,,,,
+IOL42A,I/O,DQ2,6,,_ _ True of IOL42B,TRUE,,32,28,,32,32,
+IOL42B,I/O,DQ2,6,,_ _ Comp of IOL42A,TRUE,,33,29,,33,33,
+IOL43A,I/O,DQ2,6,,_ _ True of IOL43B,NONE,,,,,,,
+IOL43B,I/O,DQ2,6,,_ _ Comp of IOL43A,NONE,,,,,,,
+IOL44A,I/O,DQ2,6,,_ _ True of IOL44B,TRUE,,,30,,,,
+IOL44B,I/O,DQ2,6,,_ _ Comp of IOL44A,TRUE,,,31,,,,
+IOL45A/LPLL2 T in,I/O,DQ2,6,LPLL2 T in,_ _ True of IOL45B,NONE,13,34,32,13,34,34,13
+_ _ IOL45B/LPLL2 C in,I/O,DQ2,6,_ _ LPLL2 C in,_ _ Comp of IOL45A,NONE,,35,33,,35,35,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOL47A/LPLL2 T fb,I/O,DQ3,6,LPLL2 T fb,True of IOL47B,TRUE,15,,35,15,,,15
+_ _ IOL47B/LPLL2 C fb,I/O,DQ3,6,_ _ LPLL2 C fb,_ _ Comp of IOL47A,TRUE,16,,36,16,,,16
+_ _ IOL48A,I/O,DQ3,6,_ _,_ _ True of IOL48B,NONE,,,,,,,
+IOL48B,I/O,DQ3,6,,_ _ Comp of IOL48A,NONE,,,,,,,
+IOL49A,I/O,DQ3,6,,_ _ True of IOL49B,TRUE,17,,37,17,,,17
+IOL49B,I/O,DQ3,6,,_ _ Comp of IOL49A,TRUE,18,,,18,,,18
+IOL4A,I/O,DQ0,7,,_ _ True of IOL4B,TRUE,,,,,,,
+IOL4B,I/O,DQ0,7,,_ _ Comp of IOL4A,TRUE,,,,,,,
+IOL50A,I/O,DQS3,6,,_ _ True of IOL50B,NONE,,,38,,,,
+IOL50B,I/O,DQS3,6,,_ _ Comp of IOL50A,NONE,,,39,,,,
+IOL51A,I/O,DQ3,6,,_ _ True of IOL51B,TRUE,19,,,19,,,19
+IOL51B,I/O,DQ3,6,,_ _ Comp of IOL51A,TRUE,20,,,20,,,20
+IOL52A,I/O,DQ3,6,,_ _ True of IOL52B,NONE,,,,,,,
+IOL52B,I/O,DQ3,6,,_ _ Comp of IOL52A,NONE,,,,,,,
+IOL53A,I/O,DQ3,6,,_ _ True of IOL53B,TRUE,,,41,,,,
+IOL53B,I/O,DQ3,6,,_ _ Comp of IOL53A,TRUE,,,42,,,,
+IOL54A,I/O,DQ3,6,,_ _ True of IOL54B,NONE,,,,,,,
+IOL54B,I/O,DQ3,6,,_ _ Comp of IOL54A,NONE,,,,,,,
+IOL5A,I/O,DQ0,7,,_ _ True of IOL5B,NONE,,,,,,,
+IOL5B,I/O,DQ0,7,,_ _ Comp of IOL5A,NONE,,,,,,,
+IOL6A,I/O,DQS0,7,,_ _ True of IOL6B,TRUE,,,,,,,
+IOL6B,I/O,DQS0,7,,_ _ Comp of IOL6A,TRUE,,,,,,,
+IOL7A/LPLL1 T in,I/O,DQ0,7,LPLL1 T in,_ _ True of IOL7B,NONE,4,6,,4,6,6,4
+_ _ IOL7B/LPLL1 C in,I/O,DQ0,7,_ _ LPLL1 C in,_ _ Comp of IOL7A,NONE,,7,,,7,7,
+_ _ IOL8A/LPLL1 T fb,I/O,DQ0,7,_ _ LPLL1 T fb,_ _ True of IOL8B,TRUE,,,,,,,
+_ _ IOL8B/LPLL1 C fb,I/O,DQ0,7,_ _ LPLL1 C fb,_ _ Comp of IOL8A,TRUE,,,,,,,
+_ _ IOL9A,I/O,DQ0,7,_ _,_ _ True of IOL9B,NONE,,,,,,,
+IOL9B,I/O,DQ0,7,,_ _ Comp of IOL9A,NONE,,,,,,,
+IOR11A,I/O,DQ10,2,,_ _ True of IOR11B,TRUE,,,,,,,
+IOR11B,I/O,DQ10,2,,_ _ Comp of IOR11A,TRUE,,,,,,,
+IOR12A,I/O,DQ10,2,,_ _ True of IOR12B,NONE,,,,,,,
+IOR12B,I/O,DQ10,2,,_ _ Comp of IOR12A,NONE,,,,,,,
+IOR13A,I/O,DQ10,2,,_ _ True of IOR13B,TRUE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOR13B,I/O,DQ10,2,,Comp of IOR13A,TRUE,,,,,,,
+IOR14A,I/O,DQ10,2,,_ _ True of IOR14B,NONE,,,126,,,,
+IOR14B,I/O,DQ10,2,,_ _ Comp of IOR14A,NONE,,,,,,,
+IOR15A,I/O,DQ10,2,,_ _ True of IOR15B,TRUE,,,,,,,
+IOR15B,I/O,DQ10,2,,_ _ Comp of IOR15A,TRUE,,,,,,,
+IOR16A,I/O,DQ10,2,,_ _ True of IOR16B,NONE,,,,,,,
+IOR16B,I/O,DQ10,2,,_ _ Comp of IOR16A,NONE,,,,,,,
+IOR17A,I/O,DQ10,2,,_ _ True of IOR17B,TRUE,,,,,,,
+IOR17B,I/O,DQ10,2,,_ _ Comp of IOR17A,TRUE,,,,,,,
+IOR18A,I/O,DQ10,2,,_ _ True of IOR18B,NONE,,,,,,,
+IOR18B,I/O,DQ10,2,,_ _ Comp of IOR18A,NONE,,,,,,,
+IOR20A,I/O,DQ10,2,,_ _ True of IOR20B,TRUE,,102,125,,102,102,
+IOR20B,I/O,DQ10,2,,_ _ Comp of IOR20A,TRUE,,101,124,,101,101,
+IOR21A,I/O,DQ10,2,,_ _ True of IOR21B,NONE,,,,,,,
+IOR21B,I/O,DQ10,2,,_ _ Comp of IOR21A,NONE,,,,,,,
+IOR22A,I/O,DQS10,2,,_ _ True of IOR22B,TRUE,,100,123,,100,100,
+IOR22B,I/O,DQS10,2,,_ _ Comp of IOR22A,TRUE,,99,122,,99,99,
+IOR23A,I/O,DQ10,2,,_ _ True of IOR23B,NONE,,,,,,,
+IOR23B,I/O,DQ10,2,,_ _ Comp of IOR23A,NONE,,,,,,,
+IOR24A,I/O,DQ10,2,,_ _ True of IOR24B,TRUE,,,,,,,
+IOR24B,I/O,DQ10,2,,_ _ Comp of IOR24A,TRUE,,,,,,,
+IOR25A/TDO,I/O,DQ10,2,TDO,_ _ True of IOR25B,NONE,8,18,121,8,18,18,8
+IOR25B/TMS,I/O,DQ10,2,TMS,_ _ Comp of IOR25A,NONE,5,13,119,5,13,13,5
+IOR26A/TCK,I/O,DQ10,2,TCK,_ _ True of IOR26B,TRUE,6,14,120,6,14,14,6
+IOR26B/TDI,I/O,DQ10,2,TDI,_ _ Comp of IOR26A,TRUE,7,16,117,7,16,16,7
+IOR27A/GCLKT 2,I/O,DQ10,2,GCLKT 2,_ _ True of IOR27B,NONE,,98,116,,98,98,
+_ IOR27B/GCLKC 2,I/O,DQ10,2,_ GCLKC 2,_ _ Comp of IOR27A,NONE,,97,,,97,97,
+_ IOR29A/GCLKT 3,I/O,DQ9,3,_ GCLKT 3,_ _ True of IOR29B,TRUE,63,,114,63,,,63
+_ IOR29B/GCLKC 3,I/O,DQ9,3,_ GCLKC 3,_ _ Comp of IOR29A,TRUE,,,,,,,
+_ IOR2A,I/O,DQ11,2,_,_ _ True of IOR2B,TRUE,,,,,,,
+IOR2B,I/O,DQ11,2,,_ _ Comp of IOR2A,TRUE,,,,,,,
+IOR30A/MODE0,I/O,DQ9,3,MODE0,_ _ True of IOR30B,NONE,88,144,113,88,144,144,88
+IOR30B/MODE1,I/O,DQ9,3,MODE1,_ _ Comp of IOR30A,NONE,87,142,111,87,142,142,87
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOR31A/MODE2,I/O,DQ9,3,MODE2,True of IOR31B _ _,TRUE,GND[4],143,112,GND[4],143,143,GND[4]
+IOR31B/RECONFIG N,I/O,DQ9,3,RECONFIG N,Comp of IOR31A,TRUE,9,20,108,9,20,20,9
+_ IOR32A/READY,I/O,DQ9,3,_ READY,_ _ True of IOR32B,NONE,,22,109,,22,22,
+IOR32B/DONE,I/O,DQ9,3,DONE,_ _ Comp of IOR32A,NONE,,21,107,,21,21,
+IOR33A/MI/D7,I/O,DQ9,3,MI/D7,_ _ True of IOR33B,TRUE,62,96,106,62,96,96,62
+IOR33B/MO/D6,I/O,DQ9,3,MO/D6,_ _ Comp of IOR33A,TRUE,61,95,105,61,95,95,61
+IOR34A/MCS N/D5,I/O,DQ9,3,MCS N/D5,_ _ True of IOR34B,NONE,60,94,104,60,94,94,60
+_ IOR34B/MCLK/D4,I/O,DQ9,3,_ MCLK/D4,_ _ Comp of IOR34A,NONE,59,93,103,59,93,93,59
+IOR35A/FASTRD N/D3 _,I/O,DQ9,3,FASTRD N _ /D3,_ _ True of IOR35B _ _,TRUE,57,92,102,57,92,92,57
+IOR35B/SI/D2,I/O,DQ9,3,SI/D2,Comp of IOR35A,TRUE,,90,101,,90,90,
+IOR36A/SO/D1,I/O,DQS9,3,SO/D1,_ _ True of IOR36B,NONE,56,88,100,56,88,88,56
+IOR36B/SSPI CS N/D0 _ _,I/O,DQS9,3,SSPI CS N/D _ _ 0,_ _ Comp of IOR36A _ _,NONE,55,87,99,55,87,87,55
+IOR38A/DIN/CLKHOLD _ N,I/O,DQ9,3,DIN/CLKHOLD N _,True of IOR38B _ _,TRUE,54,86,98,54,86,86,54
+IOR38B/DOUT/WE N,I/O,DQ9,3,DOUT/WE N,Comp of IOR38A,TRUE,53,85,97,53,85,85,53
+_ IOR39A/SCLK,I/O,DQ9,3,_ SCLK,_ _ True of IOR39B,NONE,52,15,96,52,15,15,52
+IOR39B,I/O,DQ9,3,,_ _ Comp of IOR39A,NONE,,,,,,,
+IOR3A,I/O,DQ11,2,,_ _ True of IOR3B,NONE,,,,,,,
+IOR3B,I/O,DQ11,2,,_ _ Comp of IOR3A,NONE,,,,,,,
+IOR40A,I/O,DQ9,3,,_ _ True of IOR40B,TRUE,,,,,,,
+IOR40B,I/O,DQ9,3,,_ _ Comp of IOR40A,TRUE,,,,,,,
+IOR41A,I/O,DQ9,3,,_ _ True of IOR41B,NONE,,,,,,,
+IOR41B,I/O,DQ9,3,,_ _ Comp of IOR41A,NONE,,,,,,,
+IOR42A,I/O,DQ9,3,,_ _ True of IOR42B,TRUE,,84,,,84,84,
+IOR42B,I/O,DQ9,3,,_ _ Comp of IOR42A,TRUE,,83,,,83,83,
+IOR43A,I/O,DQ9,3,,_ _ True of IOR43B,NONE,,,,,,,
+IOR43B,I/O,DQ9,3,,_ _ Comp of IOR43A,NONE,,,,,,,
+IOR44A,I/O,DQ9,3,,_ _ True of IOR44B,TRUE,,,,,,,
+IOR44B,I/O,DQ9,3,,_ _ Comp of IOR44A,TRUE,,,,,,,
+IOR45A/RPLL2 T in,I/O,DQ9,3,RPLL2 T in,_ _ True of IOR45B,NONE,51,82,93,51,82,82,51
+_ _ IOR45B/RPLL2 C in,I/O,DQ9,3,_ _ RPLL2 C in,_ _ Comp of IOR45A,NONE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOR47A/RPLL2 T fb,I/O,DQ8,3,RPLL2 T fb,True of IOR47B,TRUE,,,92,,,,
+_ _ IOR47B/RPLL2 C fb,I/O,DQ8,3,_ _ RPLL2 C fb,_ _ Comp of IOR47A,TRUE,,,,,,,
+_ _ IOR48A,I/O,DQ8,3,_ _,_ _ True of IOR48B,NONE,,,,,,,
+IOR48B,I/O,DQ8,3,,_ _ Comp of IOR48A,NONE,,,,,,,
+IOR49A,I/O,DQ8,3,,_ _ True of IOR49B,TRUE,49,80,,49,80,80,49
+IOR49B,I/O,DQ8,3,,_ _ Comp of IOR49A,TRUE,48,79,,48,79,79,48
+IOR4A,I/O,DQ11,2,,_ _ True of IOR4B,TRUE,,,,,,,
+IOR4B,I/O,DQ11,2,,_ _ Comp of IOR4A,TRUE,,,,,,,
+IOR50A,I/O,DQS8,3,,_ _ True of IOR50B,NONE,,78,,,78,78,
+IOR50B,I/O,DQS8,3,,_ _ Comp of IOR50A,NONE,,76,,,76,76,
+IOR51A,I/O,DQ8,3,,_ _ True of IOR51B,TRUE,,,,,,,
+IOR51B,I/O,DQ8,3,,_ _ Comp of IOR51A,TRUE,,,,,,,
+IOR52A,I/O,DQ8,3,,_ _ True of IOR52B,NONE,,,,,,,
+IOR52B,I/O,DQ8,3,,_ _ Comp of IOR52A,NONE,,,,,,,
+IOR53A,I/O,DQ8,3,,_ _ True of IOR53B,TRUE,,,,,,,
+IOR53B,I/O,DQ8,3,,_ _ Comp of IOR53A,TRUE,,,,,,,
+IOR54A,I/O,DQ8,3,,_ _ True of IOR54B,NONE,,,,,,,
+IOR54B,I/O,DQ8,3,,_ _ Comp of IOR54A,NONE,,,,,,,
+IOR5A,I/O,DQ11,2,,_ _ True of IOR5B,NONE,,,,,,,
+IOR5B,I/O,DQ11,2,,_ _ Comp of IOR5A,NONE,,,,,,,
+IOR6A,I/O,DQS11,2,,_ _ True of IOR6B,TRUE,,,,,,,
+IOR6B,I/O,DQS11,2,,_ _ Comp of IOR6A,TRUE,,,,,,,
+IOR7A/RPLL1 T in,I/O,DQ11,2,RPLL1 T in,_ _ True of IOR7B,NONE,,106,129,,106,106,
+_ _ IOR7B/RPLL1 C in,I/O,DQ11,2,_ _ RPLL1 C in,_ _ Comp of IOR7A,NONE,,105,128,,105,105,
+_ _ IOR8A/RPLL1 T fb,I/O,DQ11,2,_ _ RPLL1 T fb,_ _ True of IOR8B,TRUE,,,,,,,
+_ _ IOR8B/RPLL1 C fb,I/O,DQ11,2,_ _ RPLL1 C fb,_ _ Comp of IOR8A,TRUE,,,,,,,
+_ _ IOR9A,I/O,DQ11,2,_ _,_ _ True of IOR9B,NONE,,,,,,,
+IOR9B,I/O,DQ11,2,,_ _ Comp of IOR9A,NONE,,,,,,,
+IOT12A,I/O,DQ14,0,,_ _ True of IOT12B,TRUE,,134,169,,134,134,
+IOT12B,I/O,DQ14,0,,_ _ Comp of IOT12A,TRUE,,133,168,,133,133,
+IOT13A,I/O,DQ14,0,,_ _ True of IOT13B,NONE,,,,,,,
+IOT13B,I/O,DQ14,0,,_ _ Comp of IOT13A,NONE,,,,,,,
+IOT14A,I/O,DQ14,0,,_ _ True of IOT14B,TRUE,,132,167,,132,132,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOT14B,I/O,DQ14,0,,Comp of IOT14A,TRUE,,131,166,,131,131,
+IOT15A,I/O,DQ14,0,,_ _ True of IOT15B,NONE,,,,,,,
+IOT15B,I/O,DQ14,0,,_ _ Comp of IOT15A,NONE,,,,,,,
+IOT16A,I/O,DQ14,0,,_ _ True of IOT16B,TRUE,,,165,,,,
+IOT16B,I/O,DQ14,0,,_ _ Comp of IOT16A,TRUE,,,164,,,,
+IOT17A,I/O,DQ14,0,,_ _ True of IOT17B,NONE,82,130,,82,130,130,82
+IOT17B,I/O,DQ14,0,,_ _ Comp of IOT17A,NONE,81,129,,81,129,129,81
+IOT18A,I/O,DQ14,0,,_ _ True of IOT18B,TRUE,,,163,,,,
+IOT18B,I/O,DQ14,0,,_ _ Comp of IOT18A,TRUE,,,162,,,,
+IOT19A,I/O,DQ14,0,,_ _ True of IOT19B,NONE,,128,,,128,128,
+IOT19B,I/O,DQ14,0,,_ _ Comp of IOT19A,NONE,,,,,,,
+IOT20A,I/O,DQ14,0,,_ _ True of IOT20B,TRUE,,,,,,,
+IOT20B,I/O,DQ14,0,,_ _ Comp of IOT20A,TRUE,,,,,,,
+IOT21A,I/O,DQS14,0,,_ _ True of IOT21B,NONE,,,161,,,,
+IOT21B,I/O,DQS14,0,,_ _ Comp of IOT21A,NONE,,,160,,,,
+IOT22A,I/O,DQ14,0,,_ _ True of IOT22B,TRUE,,125,,,125,125,
+IOT22B,I/O,DQ14,0,,_ _ Comp of IOT22A,TRUE,,,,,,,
+IOT23A,I/O,DQ14,0,,_ _ True of IOT23B,NONE,,126,,,126,126,
+IOT23B,I/O,DQ14,0,,_ _ Comp of IOT23A,NONE,,124,,,124,124,
+IOT24A,I/O,DQ14,0,,_ _ True of IOT24B,TRUE,,,159,,,,
+IOT24B,I/O,DQ14,0,,_ _ Comp of IOT24A,TRUE,,,158,,,,
+IOT25A,I/O,DQ14,0,,_ _ True of IOT25B,NONE,,,,,,,
+IOT25B,I/O,DQ14,0,,_ _ Comp of IOT25A,NONE,,,,,,,
+IOT26A,I/O,DQ14,0,,_ _ True of IOT26B,TRUE,,,,,,,
+IOT26B,I/O,DQ14,0,,_ _ Comp of IOT26A,TRUE,,,,,,,
+IOT27A/GCLKT 0,I/O,DQ14,0,GCLKT 0,_ _ True of IOT27B,NONE,80,123,157,80,123,123,80
+_ IOT27B/GCLKC 0,I/O,DQ14,0,_ GCLKC 0,_ _ Comp of IOT27A,NONE,79,122,156,79,122,122,79
+_ IOT2A,I/O,DQ15,0,_,_ _ True of IOT2B,TRUE,,,,,,,
+IOT2B,I/O,DQ15,0,,_ _ Comp of IOT2A,TRUE,,141,,,141,141,
+IOT30A/GCLKT 1,I/O,DQ13,1,GCLKT 1,_ _ True of IOT30B,TRUE,77,121,152,77,121,121,77
+_ IOT30B/GCLKC 1,I/O,DQ13,1,_ GCLKC 1,_ _ Comp of IOT30A,TRUE,76,120,151,76,120,120,76
+_ IOT31A,I/O,DQ13,1,_,_ _ True of IOT31B,NONE,,,,,,,
+IOT31B,I/O,DQ13,1,,_ _ Comp of IOT31A,NONE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOT32A,I/O,DQ13,1,,True of IOT32B,TRUE,,,,,,,
+IOT32B,I/O,DQ13,1,,_ _ Comp of IOT32A,TRUE,,,,,,,
+IOT33A,I/O,DQ13,1,,_ _ True of IOT33B,NONE,,,,,,,
+IOT33B,I/O,DQ13,1,,_ _ Comp of IOT33A,NONE,,,,,,,
+IOT34A,I/O,DQ13,1,,_ _ True of IOT34B,TRUE,75,,,75,,,75
+IOT34B,I/O,DQ13,1,,_ _ Comp of IOT34A,TRUE,74,,,74,,,74
+IOT35A,I/O,DQ13,1,,_ _ True of IOT35B,NONE,,,,,,,
+IOT35B,I/O,DQ13,1,,_ _ Comp of IOT35A,NONE,,,,,,,
+IOT36A,I/O,DQ13,1,,_ _ True of IOT36B,TRUE,,,,,,,
+IOT36B,I/O,DQ13,1,,_ _ Comp of IOT36A,TRUE,,,,,,,
+IOT37A,I/O,DQS13,1,,_ _ True of IOT37B,NONE,,,150,,,,
+IOT37B,I/O,DQS13,1,,_ _ Comp of IOT37A,NONE,,,149,,,,
+IOT38A,I/O,DQ13,1,,_ _ True of IOT38B,TRUE,,119,148,,119,119,
+IOT38B,I/O,DQ13,1,,_ _ Comp of IOT38A,TRUE,,118,147,,118,118,
+IOT39A,I/O,DQ13,1,,_ _ True of IOT39B,NONE,,,,,,,
+IOT39B,I/O,DQ13,1,,_ _ Comp of IOT39A,NONE,,,,,,,
+IOT3A,I/O,DQ15,0,,_ _ True of IOT3B,NONE,,,,,,,
+IOT3B,I/O,DQ15,0,,_ _ Comp of IOT3A,NONE,,,,,,,
+IOT40A,I/O,DQ13,1,,_ _ True of IOT40B,TRUE,73,117,146,73,117,117,73
+IOT40B,I/O,DQ13,1,,_ _ Comp of IOT40A,TRUE,72,116,145,72,116,116,72
+IOT41A,I/O,DQ13,1,,_ _ True of IOT41B,NONE,,,,,,,
+IOT41B,I/O,DQ13,1,,_ _ Comp of IOT41A,NONE,,,,,,,
+IOT42A,I/O,DQ13,1,,_ _ True of IOT42B,TRUE,,115,144,,115,115,
+IOT42B,I/O,DQ13,1,,_ _ Comp of IOT42A,TRUE,,114,143,,114,114,
+IOT43A,I/O,DQ13,1,,_ _ True of IOT43B,NONE,,,,,,,
+IOT43B,I/O,DQ13,1,,_ _ Comp of IOT43A,NONE,,,,,,,
+IOT44A,I/O,DQ13,1,,_ _ True of IOT44B,TRUE,71,,142,71,,,71
+IOT44B,I/O,DQ13,1,,_ _ Comp of IOT44A,TRUE,70,,141,70,,,70
+IOT45A,I/O,DQ13,1,,_ _ True of IOT45B,NONE,,,,,,,
+IOT45B,I/O,DQ13,1,,_ _ Comp of IOT45A,NONE,,,,,,,
+IOT48A,I/O,DQS12,1,,_ _ True of IOT48B,TRUE,,113,140,,113,113,
+IOT48B,I/O,DQS12,1,,_ _ Comp of IOT48A,TRUE,,112,139,,112,112,
+IOT49A,I/O,DQ12,1,,_ _ True of IOT49B,NONE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+IOT49B,I/O,DQ12,1,,Comp of IOT49A,NONE,,,,,,,
+IOT4A,I/O,DQ15,0,,_ _ True of IOT4B,TRUE,86,140,,86,140,140,86
+IOT4B,I/O,DQ15,0,,_ _ Comp of IOT4A,TRUE,85,139,174,85,139,139,85
+IOT50A,I/O,DQ12,1,,_ _ True of IOT50B,TRUE,69,111,138,69,111,111,69
+IOT50B,I/O,DQ12,1,,_ _ Comp of IOT50A,TRUE,,110,137,,110,110,
+IOT51A,I/O,DQ12,1,,_ _ True of IOT51B,NONE,,,,,,,
+IOT51B,I/O,DQ12,1,,_ _ Comp of IOT51A,NONE,,,,,,,
+IOT52A,I/O,DQ12,1,,_ _ True of IOT52B,TRUE,,,136,,,,
+IOT52B,I/O,DQ12,1,,_ _ Comp of IOT52A,TRUE,,,135,,,,
+IOT53A,I/O,DQ12,1,,_ _ True of IOT53B,NONE,,,,,,,
+IOT53B,I/O,DQ12,1,,_ _ Comp of IOT53A,NONE,,,,,,,
+IOT54A,I/O,DQ12,1,,_ _ True of IOT54B,TRUE,,,,,,,
+IOT54B,I/O,DQ12,1,,_ _ Comp of IOT54A,TRUE,,,,,,,
+IOT55A,I/O,DQ12,1,,_ _ True of IOT55B,NONE,,,,,,,
+IOT55B/JTAGSEL N,I/O,DQ12,1,JTAGSEL N,_ _ Comp of IOT55A,NONE,,,,,,,
+_ IOT5A,I/O,DQ15,0,_,_ _ True of IOT5B,NONE,,,,,,,
+IOT5B,I/O,DQ15,0,,_ _ Comp of IOT5A,NONE,,,,,,,
+IOT6A,I/O,DQ15,0,,_ _ True of IOT6B,TRUE,84,138,173,84,138,138,84
+IOT6B,I/O,DQ15,0,,_ _ Comp of IOT6A,TRUE,83,137,172,83,137,137,83
+IOT7A,I/O,DQ15,0,,_ _ True of IOT7B,NONE,,136,,,136,136,
+IOT7B,I/O,DQ15,0,,_ _ Comp of IOT7A,NONE,,135,,,135,135,
+IOT8A,I/O,DQ15,0,,_ _ True of IOT8B,TRUE,,,,,,,
+IOT8B,I/O,DQ15,0,,_ _ Comp of IOT8A,TRUE,,,,,,,
+IOT9A,I/O,DQS15,0,,_ _ True of IOT9B,NONE,,,171,,,,
+IOT9B,I/O,DQS15,0,,_ _ Comp of IOT9A,NONE,,,170,,,,
+VCC,Power,,N/A,,_ _,,1,,,1,,,1
+VCC,Power,,N/A,,,,22,,44,22,,,22
+VCC,Power,,N/A,,,,45,,89,45,,,45
+VCC,Power,,N/A,,,,66,,132,66,,,66
+VCC,Power,,N/A,,,,,,1,,,,
+VCC,Power,,N/A,,,,,,,,,,
+VCC/VCCPLLL1,Power,,N/A,,,,,1,,,,,
+VCC/VCCPLLL1,Power,,N/A,,,,,36,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+VCC/VCCPLLL1,Power,,N/A,,,,,73,,,,,
+VCC/VCCPLLL1,Power,,N/A,,,,,108,,,,,
+VCC/VCCPLLL1,Power,,N/A,,,,,,,,1,1,
+VCC/VCCPLLL1,Power,,N/A,,,,,,,,36,36,
+VCC/VCCPLLL1,Power,,N/A,,,,,,,,73,73,
+VCC/VCCPLLL1,Power,,N/A,,,,,,,,108,108,
+VCCIO0,Power,,N/A,,,,78,,155,78,,,78
+VCCIO0,Power,,N/A,,,,,127,,,127,127,
+VCCIO0,Power,,N/A,,,,,,176,,,,
+VCCIO1,Power,,N/A,,,,67,109,133,,109,109,
+VCCIO1,Power,,N/A,,,,,,153,,,,
+VCCIO2,Power,,N/A,,,,,,,,,103,64
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,5,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,13,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,22,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,40,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,95,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,110,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,118,,,,
+VCCIO2/VCCIO3/VCCIO 6/VCCIO7,Power,,N/A,,,,,,130,,,,
+VCCIO2/VCCIO7,Power,,N/A,,,,,,,,5,,
+VCCIO2/VCCIO7,Power,,N/A,,,,,,,,19,,
+VCCIO2/VCCIO7,Power,,N/A,,,,,,,,103,,
+VCCIO2/VCCIO7,Power,,N/A,,,,,,,3,,,
+VCCIO2/VCCIO7,Power,,N/A,,,,,,,64,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+VCCIO3,Power,,N/A,,,,58,91,,58,91,91,58
+VCCIO3,Power,,N/A,,,,,77,,,77,77,
+VCCIO4,Power,,N/A,,,,44,,88,44,,,44
+VCCIO4,Power,,N/A,,,,,55,67,,,,
+VCCIO5,Power,,N/A,,,,23,37,45,23,37,37,23
+VCCIO5,Power,,N/A,,,,,,65,,,,
+VCCIO7,Power,,N/A,,,,,,,,,5,3
+VCCIO7,Power,,N/A,,,,,,,,,19,
+VCCPLLL,Power,,N/A,,,,,,,,,,
+VCCPLLL0,Power,,N/A,,,,,8,,,8,8,
+VCCPLLL1,Power,,N/A,,,,14,,34,14,,,14
+VCCPLLR,Power,,N/A,,,,,,,,,,
+VCCPLLR0,Power,,N/A,,,,,104,127,,104,104,
+VCCPLLR1,Power,,N/A,,,,50,81,94,50,81,81,50
+VCCX,Power,,N/A,,,,,,23,,,,
+VCCX,Power,,N/A,,,,,,66,,,,
+VCCX,Power,,N/A,,,,,,115,,,,
+VCCX,Power,,N/A,,,,,,154,,,,
+VCCX/VCCIO1/VCCIO6,Power,,N/A,,,,,,,12,,,12
+VCCX/VCCIO1/VCCIO6,Power,,N/A,,,,,,,67,,,67
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,3,,,,,,
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,12,,,,,,
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,64,,,,,,
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,,5,,,,,
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,,19,,,,,
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,,31,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO6/VCCIO7,Power,,N/A,,,,,103,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO2/ VCCIO3/VCCIO6/ VCCIO7,Power,,N/A,,,,,,,,,,
+VCCX/VCCIO4/VCCIO6,Power,,N/A,,,,,,,,31,31,
+VCCX/VCCIO4/VCCIO6,Power,,N/A,,,,,,,,55,55,
+VSS,Ground,,N/A,,,,2,2,2,2,2,2,2
+VSS,Ground,,N/A,,,,21,,,21,,,21
+VSS,Ground,,N/A,,,,24,,,24,,,24
+VSS,Ground,,N/A,,,,43,,,43,,,43
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM. [3] “Tie to VSS by 10K Resisitor”indicates the pin is connected to the ground with 10K resistance. [4] The pin is internally grounded.,,,,,,,,,,,,,
+VSS,Ground,,N/A,,,,46,74,90,46,74,74,46
+VSS,Ground,,N/A,,,,65,,131,65,107,107,65
+VSS,Ground,,N/A,,,,68,,,68,,,68
+VSS,Ground,,N/A,,,,,17,134,,17,17,
+VSS,Ground,,N/A,,,,,53,175,,53,53,
+VSS,Ground,,N/A,,,,,89,,,89,89,
+VSS,Ground,,N/A,,,,,107,,,,,
+VSS,Ground,,N/A,,,,,,43,,,,
+VSS,Ground,,N/A,,,,,,46,,,,
+VSS,Ground,,N/A,,,,,,87,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+VSS,Ground,,N/A,,,,,,,,,,
+NC,N/A,,N/A,,,,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM.,,,,,,,,,,,,,
+BANK7 True LVDS Pair,,,,,,,,,,,,,
+IOL11A,I/O,DQ1,7,,True of IOL11B,TRUE,,,,,,,
+IOL11B,I/O,DQ1,7,,_ _ Comp of IOL11A,TRUE,,,,,,,
+IOL13A,I/O,DQ1,7,,_ _ True of IOL13B,TRUE,,,,,,,
+IOL13B,I/O,DQ1,7,,_ _ Comp of IOL13A,TRUE,,,,,,,
+IOL15A,I/O,DQ1,7,,_ _ True of IOL15B,TRUE,,,8,,,,
+IOL15B,I/O,DQ1,7,,_ _ Comp of IOL15A,TRUE,,,9,,,,
+IOL17A,I/O,DQ1,7,,_ _ True of IOL17B,TRUE,,,10,,,,
+IOL17B,I/O,DQ1,7,,_ _ Comp of IOL17A,TRUE,,,11,,,,
+IOL20A,I/O,DQ1,7,,_ _ True of IOL20B,TRUE,,,,,,,
+IOL20B,I/O,DQ1,7,,_ _ Comp of IOL20A,TRUE,,,,,,,
+IOL22A,I/O,DQS1,7,,_ _ True of IOL22B,TRUE,,9,,,9,9,
+IOL22B,I/O,DQS1,7,,_ _ Comp of IOL22A,TRUE,,10,,,10,10,
+IOL24A,I/O,DQ1,7,,_ _ True of IOL24B,TRUE,,,15,,,,
+IOL24B,I/O,DQ1,7,,_ _ Comp of IOL24A,TRUE,,,16,,,,
+IOL26A,I/O,DQ1,7,,_ _ True of IOL26B,TRUE,,,17,,,,
+IOL26B,I/O,DQ1,7,,_ _ Comp of IOL26A,TRUE,,,19,,,,
+IOL2A,I/O,DQ0,7,,_ _ True of IOL2B,TRUE,,3,3,,3,3,
+IOL2B,I/O,DQ0,7,,_ _ Comp of IOL2A,TRUE,,4,4,,4,4,
+IOL4A,I/O,DQ0,7,,_ _ True of IOL4B,TRUE,,,,,,,
+IOL4B,I/O,DQ0,7,,_ _ Comp of IOL4A,TRUE,,,,,,,
+IOL6A,I/O,DQS0,7,,_ _ True of IOL6B,TRUE,,,,,,,
+IOL6B,I/O,DQS0,7,,_ _ Comp of IOL6A,TRUE,,,,,,,
+IOL8A/LPLL1 T fb,I/O,DQ0,7,LPLL1 T fb,_ _ True of IOL8B,TRUE,,,,,,,
+_ _ IOL8B/LPLL1 C fb,I/O,DQ0,7,_ _ LPLL1 C fb,_ _ Comp of IOL8A,TRUE,,,,,,,
+_ _ _ _ _ _ BANK6 True LVDS Pair,,,,,,,,,,,,,
+IOL29A/GCLKT 6,I/O,DQ2,6,GCLKT 6,True of IOL29B,TRUE,10,25,,10,25,25,10
+_ IOL29B/GCLKC 6,I/O,DQ2,6,_ GCLKC 6,_ _ Comp of IOL29A,TRUE,11,26,,11,26,26,11
+_ IOL31A,I/O,DQ2,6,_,_ _ True of IOL31B,TRUE,,,,,,,
+IOL31B,I/O,DQ2,6,,_ _ Comp of IOL31A,TRUE,,,,,,,
+IOL33A,I/O,DQ2,6,,_ _ True of IOL33B,TRUE,,27,,,27,27,
+IOL33B,I/O,DQ2,6,,_ _ Comp of IOL33A,TRUE,,28,,,28,28,
+IOL35A,I/O,DQ2,6,,_ _ True of IOL35B,TRUE,,,,,,,
+IOL35B,I/O,DQ2,6,,_ _ Comp of IOL35A,TRUE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM.,,,,,,,,,,,,,
+IOL38A,I/O,DQ2,6,,True of IOL38B,TRUE,,,24,,,,
+IOL38B,I/O,DQ2,6,,_ _ Comp of IOL38A,TRUE,,,25,,,,
+IOL40A,I/O,DQ2,6,,_ _ True of IOL40B,TRUE,,,26,,,,
+IOL40B,I/O,DQ2,6,,_ _ Comp of IOL40A,TRUE,,,27,,,,
+IOL42A,I/O,DQ2,6,,_ _ True of IOL42B,TRUE,,32,28,,32,32,
+IOL42B,I/O,DQ2,6,,_ _ Comp of IOL42A,TRUE,,33,29,,33,33,
+IOL44A,I/O,DQ2,6,,_ _ True of IOL44B,TRUE,,,30,,,,
+IOL44B,I/O,DQ2,6,,_ _ Comp of IOL44A,TRUE,,,31,,,,
+IOL47A/LPLL2 T fb,I/O,DQ3,6,LPLL2 T fb,_ _ True of IOL47B,TRUE,15,,35,15,,,15
+_ _ IOL47B/LPLL2 C fb,I/O,DQ3,6,_ _ LPLL2 C fb,_ _ Comp of IOL47A,TRUE,16,,36,16,,,16
+_ _ IOL49A,I/O,DQ3,6,_ _,_ _ True of IOL49B,TRUE,17,,,17,,,17
+IOL49B,I/O,DQ3,6,,_ _ Comp of IOL49A,TRUE,18,,,18,,,18
+IOL51A,I/O,DQ3,6,,_ _ True of IOL51B,TRUE,19,,,19,,,19
+IOL51B,I/O,DQ3,6,,_ _ Comp of IOL51A,TRUE,20,,,20,,,20
+IOL53A,I/O,DQ3,6,,_ _ True of IOL53B,TRUE,,,41,,,,
+IOL53B,I/O,DQ3,6,,_ _ Comp of IOL53A,TRUE,,,42,,,,
+_ _ BANK5 True LVDS Pair,,,,,,,,,,,,,
+IOB12A,I/O,DQ5,5,,True of IOB12B,TRUE,,44,53,,44,44,
+IOB12B,I/O,DQ5,5,,_ _ Comp of IOB12A,TRUE,,45,54,,45,45,
+IOB14A,I/O,DQ5,5,,_ _ True of IOB14B,TRUE,29,46,55,29,46,46,29
+IOB14B,I/O,DQ5,5,,_ _ Comp of IOB14A,TRUE,30,47,56,30,47,47,30
+IOB16A,I/O,DQ5,5,,_ _ True of IOB16B,TRUE,,,,,,,
+IOB16B,I/O,DQ5,5,,_ _ Comp of IOB16A,TRUE,,,,,,,
+IOB18A,I/O,DQ5,5,,_ _ True of IOB18B,TRUE,31,,59,31,,,31
+IOB18B,I/O,DQ5,5,,_ _ Comp of IOB18A,TRUE,32,,60,32,,,32
+IOB20A,I/O,DQ5,5,,_ _ True of IOB20B,TRUE,,50,,,50,50,
+IOB20B,I/O,DQ5,5,,_ _ Comp of IOB20A,TRUE,,51,,,51,51,
+IOB22A,I/O,DQ5,5,,_ _ True of IOB22B,TRUE,,52,,,52,52,
+IOB22B,I/O,DQ5,5,,_ _ Comp of IOB22A,TRUE,,54,,,54,54,
+IOB24A,I/O,DQ5,5,,_ _ True of IOB24B,TRUE,33,,,33,,,33
+IOB24B,I/O,DQ5,5,,_ _ Comp of IOB24A,TRUE,34,,,34,,,34
+IOB26A,I/O,DQ5,5,,_ _ True of IOB26B,TRUE,,,,,,,
+IOB26B,I/O,DQ5,5,,_ _ Comp of IOB26A,TRUE,,,,,,,
+IOB2A,I/O,DQ4,5,,_ _ True of IOB2B,TRUE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM.,,,,,,,,,,,,,
+IOB2B,I/O,DQ4,5,,Comp of IOB2A,TRUE,,,,,,,
+IOB4A,I/O,DQ4,5,,_ _ True of IOB4B,TRUE,,,,,,,
+IOB4B,I/O,DQ4,5,,_ _ Comp of IOB4A,TRUE,,,,,,,
+IOB6A,I/O,DQ4,5,,_ _ True of IOB6B,TRUE,25,40,49,25,40,40,25
+IOB6B,I/O,DQ4,5,,_ _ Comp of IOB6A,TRUE,26,41,50,26,41,41,26
+IOB8A,I/O,DQ4,5,,_ _ True of IOB8B,TRUE,27,,51,27,,,27
+IOB8B,I/O,DQ4,5,,_ _ Comp of IOB8A,TRUE,28,,52,28,,,28
+_ _ BANK4 True LVDS Pair,,,,,,,,,,,,,
+IOB30A/GCLKT 4,I/O,DQ6,4,GCLKT 4,True of IOB30B,TRUE,35,56,68,35,56,56,35
+_ IOB30B/GCLKC 4,I/O,DQ6,4,_ GCLKC 4,_ _ Comp of IOB30A,TRUE,36,57,69,36,57,57,36
+_ IOB32A,I/O,DQ6,4,_,_ _ True of IOB32B,TRUE,,,,,,,
+IOB32B,I/O,DQ6,4,,_ _ Comp of IOB32A,TRUE,,,,,,,
+IOB34A,I/O,DQ6,4,,_ _ True of IOB34B,TRUE,37,60,70,37,60,60,37
+IOB34B,I/O,DQ6,4,,_ _ Comp of IOB34A,TRUE,38,61,71,38,61,61,38
+IOB36A,I/O,DQ6,4,,_ _ True of IOB36B,TRUE,,,,,,,
+IOB36B,I/O,DQ6,4,,_ _ Comp of IOB36A,TRUE,,,,,,,
+IOB38A,I/O,DQ6,4,,_ _ True of IOB38B,TRUE,,62,74,,62,62,
+IOB38B,I/O,DQ6,4,,_ _ Comp of IOB38A,TRUE,,63,75,,63,63,
+IOB40A,I/O,DQ6,4,,_ _ True of IOB40B,TRUE,39,64,76,39,64,64,39
+IOB40B,I/O,DQ6,4,,_ _ Comp of IOB40A,TRUE,40,65,77,40,65,65,40
+IOB42A,I/O,DQ6,4,,_ _ True of IOB42B,TRUE,,66,78,,66,66,
+IOB42B,I/O,DQ6,4,,_ _ Comp of IOB42A,TRUE,,67,79,,67,67,
+IOB44A,I/O,DQ6,4,,_ _ True of IOB44B,TRUE,,,80,,,,
+IOB44B,I/O,DQ6,4,,_ _ Comp of IOB44A,TRUE,,,81,,,,
+IOB48A,I/O,DQS7,4,,_ _ True of IOB48B,TRUE,,68,82,,68,68,
+IOB48B,I/O,DQS7,4,,_ _ Comp of IOB48A,TRUE,,69,83,,69,69,
+IOB50A,I/O,DQ7,4,,_ _ True of IOB50B,TRUE,,,84,,,,
+IOB50B,I/O,DQ7,4,,_ _ Comp of IOB50A,TRUE,,,85,,,,
+IOB52A,I/O,DQ7,4,,_ _ True of IOB52B,TRUE,,,,,,,
+IOB52B,I/O,DQ7,4,,_ _ Comp of IOB52A,TRUE,,,,,,,
+IOB54A,I/O,DQ7,4,,_ _ True of IOB54B,TRUE,,,,,,,
+IOB54B,I/O,DQ7,4,,_ _ Comp of IOB54A,TRUE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM.,,,,,,,,,,,,,
+BANK3 True LVDS Pair,,,,,,,,,,,,,
+IOR29A/GCLKT 3,I/O,DQ9,3,GCLKT 3,True of IOR29B,TRUE,,,,,,,
+_ IOR29B/GCLKC 3,I/O,DQ9,3,_ GCLKC 3,_ _ Comp of IOR29A,TRUE,,,,,,,
+_ IOR31A/MODE2,I/O,DQ9,3,_ MODE2,_ _ True of IOR31B,TRUE,,143,112,,143,143,
+IOR31B/RECONFIG N,I/O,DQ9,3,RECONFIG N,_ _ Comp of IOR31A,TRUE,,20,108,,20,20,
+_ IOR33A/MI/D7,I/O,DQ9,3,_ MI/D7,_ _ True of IOR33B,TRUE,62,96,106,62,96,96,62
+IOR33B/MO/D6,I/O,DQ9,3,MO/D6,_ _ Comp of IOR33A,TRUE,61,95,105,61,95,95,61
+IOR35A/FASTRD N/D3,I/O,DQ9,3,FASTRD N /D3,_ _ True of IOR35B,TRUE,,92,102,,92,92,
+_ IOR35B/SI/D2,I/O,DQ9,3,_ SI/D2,_ _ Comp of IOR35A,TRUE,,90,101,,90,90,
+IOR38A/DIN/CLKHOLD N,I/O,DQ9,3,DIN/CLKHOLD _ N,_ _ True of IOR38B _ _,TRUE,54,86,98,54,86,86,54
+_ IOR38B/DOUT/WE N,I/O,DQ9,3,DOUT/WE N,Comp of IOR38A,TRUE,53,85,97,53,85,85,53
+_ IOR40A,I/O,DQ9,3,_,_ _ True of IOR40B,TRUE,,,,,,,
+IOR40B,I/O,DQ9,3,,_ _ Comp of IOR40A,TRUE,,,,,,,
+IOR42A,I/O,DQ9,3,,_ _ True of IOR42B,TRUE,,84,,,84,84,
+IOR42B,I/O,DQ9,3,,_ _ Comp of IOR42A,TRUE,,83,,,83,83,
+IOR44A,I/O,DQ9,3,,_ _ True of IOR44B,TRUE,,,,,,,
+IOR44B,I/O,DQ9,3,,_ _ Comp of IOR44A,TRUE,,,,,,,
+IOR47A/RPLL2 T fb,I/O,DQ8,3,RPLL2 T fb,_ _ True of IOR47B,TRUE,,,,,,,
+_ _ IOR47B/RPLL2 C fb,I/O,DQ8,3,_ _ RPLL2 C fb,_ _ Comp of IOR47A,TRUE,,,,,,,
+_ _ IOR49A,I/O,DQ8,3,_ _,_ _ True of IOR49B,TRUE,49,80,,49,80,80,49
+IOR49B,I/O,DQ8,3,,_ _ Comp of IOR49A,TRUE,48,79,,48,79,79,48
+IOR51A,I/O,DQ8,3,,_ _ True of IOR51B,TRUE,,,,,,,
+IOR51B,I/O,DQ8,3,,_ _ Comp of IOR51A,TRUE,,,,,,,
+IOR53A,I/O,DQ8,3,,_ _ True of IOR53B,TRUE,,,,,,,
+IOR53B,I/O,DQ8,3,,_ _ Comp of IOR53A,TRUE,,,,,,,
+_ _ BANK2 True LVDS Pair,,,,,,,,,,,,,
+IOR11A,I/O,DQ10,2,,True of IOR11B,TRUE,,,,,,,
+IOR11B,I/O,DQ10,2,,_ _ Comp of IOR11A,TRUE,,,,,,,
+IOR13A,I/O,DQ10,2,,_ _ True of IOR13B,TRUE,,,,,,,
+IOR13B,I/O,DQ10,2,,_ _ Comp of IOR13A,TRUE,,,,,,,
+IOR15A,I/O,DQ10,2,,_ _ True of IOR15B,TRUE,,,,,,,
+IOR15B,I/O,DQ10,2,,_ _ Comp of IOR15A,TRUE,,,,,,,
+IOR17A,I/O,DQ10,2,,_ _ True of IOR17B,TRUE,,,,,,,
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM.,,,,,,,,,,,,,
+IOR17B,I/O,DQ10,2,,Comp of IOR17A,TRUE,,,,,,,
+IOR20A,I/O,DQ10,2,,_ _ True of IOR20B,TRUE,,102,125,,102,102,
+IOR20B,I/O,DQ10,2,,_ _ Comp of IOR20A,TRUE,,101,124,,101,101,
+IOR22A,I/O,DQS10,2,,_ _ True of IOR22B,TRUE,,100,123,,100,100,
+IOR22B,I/O,DQS10,2,,_ _ Comp of IOR22A,TRUE,,99,122,,99,99,
+IOR24A,I/O,DQ10,2,,_ _ True of IOR24B,TRUE,,,,,,,
+IOR24B,I/O,DQ10,2,,_ _ Comp of IOR24A,TRUE,,,,,,,
+IOR26A/TCK,I/O,DQ10,2,TCK,_ _ True of IOR26B,TRUE,6,14,120,6,14,14,6
+IOR26B/TDI,I/O,DQ10,2,TDI,_ _ Comp of IOR26A,TRUE,7,16,117,7,16,16,7
+IOR2A,I/O,DQ11,2,,_ _ True of IOR2B,TRUE,,,,,,,
+IOR2B,I/O,DQ11,2,,_ _ Comp of IOR2A,TRUE,,,,,,,
+IOR4A,I/O,DQ11,2,,_ _ True of IOR4B,TRUE,,,,,,,
+IOR4B,I/O,DQ11,2,,_ _ Comp of IOR4A,TRUE,,,,,,,
+IOR6A,I/O,DQS11,2,,_ _ True of IOR6B,TRUE,,,,,,,
+IOR6B,I/O,DQS11,2,,_ _ Comp of IOR6A,TRUE,,,,,,,
+IOR8A/RPLL1 T fb,I/O,DQ11,2,RPLL1 T fb,_ _ True of IOR8B,TRUE,,,,,,,
+_ _ IOR8B/RPLL1 C fb,I/O,DQ11,2,_ _ RPLL1 C fb,_ _ Comp of IOR8A,TRUE,,,,,,,
+_ _ _ _ _ _ BANK1 True LVDS Pair,,,,,,,,,,,,,
+IOT30A/GCLKT 1,I/O,DQ13,1,GCLKT 1,True of IOT30B,TRUE,77,121,152,77,121,121,77
+_ IOT30B/GCLKC 1,I/O,DQ13,1,_ GCLKC 1,_ _ Comp of IOT30A,TRUE,76,120,151,76,120,120,76
+_ IOT32A,I/O,DQ13,1,_,_ _ True of IOT32B,TRUE,,,,,,,
+IOT32B,I/O,DQ13,1,,_ _ Comp of IOT32A,TRUE,,,,,,,
+IOT34A,I/O,DQ13,1,,_ _ True of IOT34B,TRUE,75,,,75,,,75
+IOT34B,I/O,DQ13,1,,_ _ Comp of IOT34A,TRUE,74,,,74,,,74
+IOT36A,I/O,DQ13,1,,_ _ True of IOT36B,TRUE,,,,,,,
+IOT36B,I/O,DQ13,1,,_ _ Comp of IOT36A,TRUE,,,,,,,
+IOT38A,I/O,DQ13,1,,_ _ True of IOT38B,TRUE,,119,148,,119,119,
+IOT38B,I/O,DQ13,1,,_ _ Comp of IOT38A,TRUE,,118,147,,118,118,
+IOT40A,I/O,DQ13,1,,_ _ True of IOT40B,TRUE,73,117,146,73,117,117,73
+IOT40B,I/O,DQ13,1,,_ _ Comp of IOT40A,TRUE,72,116,145,72,116,116,72
+IOT42A,I/O,DQ13,1,,_ _ True of IOT42B,TRUE,,115,144,,115,115,
+IOT42B,I/O,DQ13,1,,_ _ Comp of IOT42A,TRUE,,114,143,,114,114,
+IOT44A,I/O,DQ13,1,,_ _ True of IOT44B,TRUE,71,,142,71,,,71
+IOT44B,I/O,DQ13,1,,_ _ Comp of IOT44A,TRUE,70,,141,70,,,70
+Note! [1] It is embedded with SDRAM. [2] It is embedded with PSRAM.,,,,,,,,,,,,,
+IOT48A,I/O,DQS12,1,,True of IOT48B,TRUE,,113,140,,113,113,
+IOT48B,I/O,DQS12,1,,_ _ Comp of IOT48A,TRUE,,112,139,,112,112,
+IOT50A,I/O,DQ12,1,,_ _ True of IOT50B,TRUE,,111,138,,111,111,
+IOT50B,I/O,DQ12,1,,_ _ Comp of IOT50A,TRUE,,110,137,,110,110,
+IOT52A,I/O,DQ12,1,,_ _ True of IOT52B,TRUE,,,136,,,,
+IOT52B,I/O,DQ12,1,,_ _ Comp of IOT52A,TRUE,,,135,,,,
+IOT54A,I/O,DQ12,1,,_ _ True of IOT54B,TRUE,,,,,,,
+IOT54B,I/O,DQ12,1,,_ _ Comp of IOT54A,TRUE,,,,,,,
+_ _ BANK0 True LVDS Pair,,,,,,,,,,,,,
+IOT12A,I/O,DQ14,0,,True of IOT12B,TRUE,,134,169,,134,134,
+IOT12B,I/O,DQ14,0,,_ _ Comp of IOT12A,TRUE,,133,168,,133,133,
+IOT14A,I/O,DQ14,0,,_ _ True of IOT14B,TRUE,,132,167,,132,132,
+IOT14B,I/O,DQ14,0,,_ _ Comp of IOT14A,TRUE,,131,166,,131,131,
+IOT16A,I/O,DQ14,0,,_ _ True of IOT16B,TRUE,,,165,,,,
+IOT16B,I/O,DQ14,0,,_ _ Comp of IOT16A,TRUE,,,164,,,,
+IOT18A,I/O,DQ14,0,,_ _ True of IOT18B,TRUE,,,163,,,,
+IOT18B,I/O,DQ14,0,,_ _ Comp of IOT18A,TRUE,,,162,,,,
+IOT20A,I/O,DQ14,0,,_ _ True of IOT20B,TRUE,,,,,,,
+IOT20B,I/O,DQ14,0,,_ _ Comp of IOT20A,TRUE,,,,,,,
+IOT22A,I/O,DQ14,0,,_ _ True of IOT22B,TRUE,,,,,,,
+IOT22B,I/O,DQ14,0,,_ _ Comp of IOT22A,TRUE,,,,,,,
+IOT24A,I/O,DQ14,0,,_ _ True of IOT24B,TRUE,,,159,,,,
+IOT24B,I/O,DQ14,0,,_ _ Comp of IOT24A,TRUE,,,158,,,,
+IOT26A,I/O,DQ14,0,,_ _ True of IOT26B,TRUE,,,,,,,
+IOT26B,I/O,DQ14,0,,_ _ Comp of IOT26A,TRUE,,,,,,,
+IOT2A,I/O,DQ15,0,,_ _ True of IOT2B,TRUE,,,,,,,
+IOT2B,I/O,DQ15,0,,_ _ Comp of IOT2A,TRUE,,,,,,,
+IOT4A,I/O,DQ15,0,,_ _ True of IOT4B,TRUE,86,140,,86,140,140,86
+IOT4B,I/O,DQ15,0,,_ _ Comp of IOT4A,TRUE,85,139,,85,139,139,85
+IOT6A,I/O,DQ15,0,,_ _ True of IOT6B,TRUE,84,138,173,84,138,138,84
+IOT6B,I/O,DQ15,0,,_ _ Comp of IOT6A,TRUE,83,137,172,83,137,137,83
+IOT8A,I/O,DQ15,0,,_ _ True of IOT8B,TRUE,,,,,,,
+IOT8B,I/O,DQ15,0,,_ _ Comp of IOT8A,TRUE,,,,,,,
+Note! VCCX should be greater than or equal to VCCIO.,,,
+Recommended Operating Conditions of EQ144/QN88 Package Embedded with SDR SDRMA in GW2AR-18,,,
+Name,Description,Min.,Max.
+VCC,Core voltage,0.95V,1.05V
+VCCPLLL0/1,"Left PLL 0/1 supply voltage, VCC/VCCPLLL1 in package LQ144 are internally connected.",0.95V,1.05V
+VCCPLLR0/1,Right PLL 0/1 supply voltage,0.95V,1.05V
+"VCCIO0, VCCIO1, VCCIO4, VCCIO5",I/O Bank power supply voltage,1.14V,3.6V
+"VCCIO2, VCCIO3, VCCIO6, VCCIO7","I/O Bank power supply voltage, connected to SDR SDRAM port",3.135V,3.6V
+VCCX/VCCIO2/ VCCIO6/VCCIO7,"VCCX, VCCIO2, and VCCIO7 provide SDR SDRAM voltage; VCCX/VCCIO2/VCCIO6/VCCIO7 are internally connected.",3.135V,3.6V
+"Note！ It is highly recommended that the EPAD connect to GND, but not a requirement.",,,
+Recommended Operating Conditions of EQ176 Package Embedded with DDR SDRMA in GW2AR-18,,,
+Name,Description,Min.,Max.
+VCC,Core voltage,0.95V,1.05V
+VCCPLLL0/1,Left PLL 0/1 supply voltage,0.95V,1.05V
+VCCPLLR0/1,Right PLL 0/1 supply voltage,0.95V,1.05V
+"VCCIO0, VCCIO1, VCCIO4, VCCIO5",I/O Bank power supply voltage,1.14V,3.6V
+"VCCIO2, VCCIO3, VCCIO6, VCCIO7","I/O Bank power supply voltage, connected to DDR SDRAM and provides power for DDR SDRAM.",2.3V,2.7V
+VCCX,Auxiliary voltage,2.7V,3.6V
+"Note！ It is highly recommended that the EPAD connect to GND, but not a requirement.",,,
+Note! VCCX should be greater than or equal to VCCIO.,,,
+Recommended Operating Conditions of QN88P Package Embedded with PSRAM in GW2AR-18,,,
+Name,Description,Min.,Max.
+VCC,Core voltage,0.95V,1.05V
+VCCPLLL0/1,Left PLL 0/1 supply voltage,0.95V,1.05V
+VCCPLLR0/1,Right PLL 0/1 supply voltage,0.95V,1.05V
+"VCCIO0, VCCIO3, VCCIO4, VCCIO5",I/O Bank power supply voltage,1.14V,3.6V
+VCCIO2/7,"I/O Bank power supply voltage, connected to PSRAM port. VCCIO2/VCCIO7 provides power for PSRAM.",1.71V,1.89V
+VCCX/VCCIO1/VCCIO6,VCCX/VCCIO1/VCCIO6 are internally connected.,2.7V,3.6V
+"Note！ It is highly recommended that the EPAD connect to GND, but not a requirement.",,,
+Recommended Operating Conditions of EQ144P Package Embedded with PSRAM in GW2AR-18,,,
+Name,Description,Min.,Max.
+VCC,Core voltage,0.95V,1.05V
+VCCPLLL0/1,Left PLL 0/1 supply voltage,0.95V,1.05V
+VCCPLLR0/1,Right PLL 0/1 supply voltage,0.95V,1.05V
+"VCCIO0, VCCIO1, VCCIO3, VCCIO5",I/O Bank power supply voltage,1.14V,3.6V
+VCCIO2/7,"I/O Bank power supply voltage, connected to PSRAM port. VCCIO2/VCCIO7 provides power for PSRAM.",1.71V,1.89V
+VCCX/VCCIO4/VCCIO6,VCCX/VCCIO4/VCCIO6 are internally connected.,2.7V,3.6V
+"Note！ It is highly recommended that the EPAD connect to GND, but not a requirement.",,,
+Note! VCCX should be greater than or equal to VCCIO.,,,
+Recommended Operating Conditions of EQ144PF Package Embedded with PSRAM in GW2AR-18,,,
+Name,Description,Min.,Max.
+VCC,Core voltage,0.95V,1.05V
+VCCPLLL0/1,Left PLL 0/1 supply voltage,0.95V,1.05V
+VCCPLLR0/1,Right PLL 0/1 supply voltage,0.95V,1.05V
+"VCCIO0, VCCIO1, VCCIO2, VCCIO3, VCCIO5",I/O Bank power supply voltage,1.14V,3.465V
+VCCIO7,"I/O Bank power supply voltage, connected to PSRAM port. VCCIO7 provides power for PSRAM.",1.71V,1.89V
+VCCX/VCCIO4/VCCIO6,VCCX/VCCIO4/VCCIO6 are internally connected.,2.7V,3.465V
+"Note！ It is highly recommended that the EPAD connect to GND, but not a requirement.",,,
+Recommended Operating Conditions of QN88PF Package Embedded with PSRAM in GW2AR-18,,,
+Name,Description,Min.,Max.
+VCC,Core voltage,0.95V,1.05V
+VCCPLLL0/1,Left PLL 0/1 supply voltage,0.95V,1.05V
+VCCPLLR0/1,Right PLL 0/1 supply voltage,0.95V,1.05V
+"VCCIO0, VCCIO2, VCCIO3, VCCIO4, VCCIO5",I/O Bank power supply voltage,1.14V,3.6V
+VCCIO7,"I/O Bank power supply voltage, connected to PSRAM port. VCCIO7 provides power for PSRAM.",1.71V,1.89V
+VCCX/VCCIO1/VCCIO6,VCCX/VCCIO1/VCCIO6 are internally connected.,2.7V,3.6V
+"Note！ It is highly recommended that the EPAD connect to GND, but not a requirement.",,,

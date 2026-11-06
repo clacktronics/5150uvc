@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "filename": "5150UVC.kicad_pro",
+    "version": 3
+  },
+  "sheets": [
+    [
+      "c3cf9e54-aaa2-45cd-97e7-daf842b8fa2d",
+      "Root"
+    ]
+  ],
+  "erc": {
+    "rule_severities": {}
+  },
+  "schematic": {},
+  "boards": [],
+  "libraries": {}
+}

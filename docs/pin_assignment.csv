@@ -1,0 +1,90 @@
+FPGA pin,Gowin pin name,Bank,VCCIO,Net,Connects to,Notes
+4,IOL7A/LPLL1_T_in,7,3.3 V,SYS_CLK,27 MHz oscillator (via 22R),Same as Tang Nano 20K
+5,IOR25B/TMS,2,3.3 V,JTAG_TMS,JTAG header,Reserved for JTAG
+6,IOR26A/TCK,2,3.3 V,JTAG_TCK,JTAG header,"Reserved for JTAG, 4.7k pull-down"
+7,IOR26B/TDI,2,3.3 V,JTAG_TDI,JTAG header,Reserved for JTAG
+8,IOR25A/TDO,2,3.3 V,JTAG_TDO,JTAG header,Reserved for JTAG
+9,IOR31B/RECONFIG_N,3,3.3 V,RECONFIG_N,RECONFIG button + 4.7k pull-up,Reserved
+10,IOL29A/GCLKT_6,6,3.3 V,TVP_SCLK,U9 TVP5150 SCLK (pin 9) via 22R,"27 MHz pixel clock, global clock pin"
+11,IOL29B/GCLKC_6,6,3.3 V,TVP_YOUT0,U9 YOUT0 (pin 18),
+13,IOL45A/LPLL2_T_in,6,3.3 V,TVP_YOUT1,U9 YOUT1 (pin 17),
+15,IOL47A/LPLL2_T_fb,6,3.3 V,TVP_YOUT2,U9 YOUT2 (pin 16),
+16,IOL47B/LPLL2_C_fb,6,3.3 V,TVP_YOUT3,U9 YOUT3 (pin 15),
+17,IOL49A,6,3.3 V,TVP_YOUT4,U9 YOUT4 (pin 14),
+18,IOL49B,6,3.3 V,TVP_YOUT5,U9 YOUT5 (pin 13),
+19,IOL51A,6,3.3 V,TVP_YOUT6,U9 YOUT6 (pin 12),
+20,IOL51B,6,3.3 V,TVP_YOUT7,U9 YOUT7/I2CSEL (pin 11),10k pull-up on TVP sheet sets I2C addr 0xBA
+25,IOB6A,5,3.3 V,FT_D0,U6 FT602 DATA_0 (pin 40),
+26,IOB6B,5,3.3 V,FT_D1,U6 DATA_1 (pin 41),
+27,IOB8A,5,3.3 V,FT_D2,U6 DATA_2 (pin 42),
+28,IOB8B,5,3.3 V,FT_D3,U6 DATA_3 (pin 43),
+29,IOB14A,5,3.3 V,FT_D4,U6 DATA_4 (pin 44),
+30,IOB14B,5,3.3 V,FT_D5,U6 DATA_5 (pin 45),
+31,IOB18A,5,3.3 V,FT_D6,U6 DATA_6 (pin 46),
+32,IOB18B,5,3.3 V,FT_D7,U6 DATA_7 (pin 47),
+33,IOB24A,5,3.3 V,FT_D8,U6 DATA_8 (pin 50),
+34,IOB24B,5,3.3 V,FT_D9,U6 DATA_9 (pin 51),
+35,IOB30A/GCLKT_4,4,3.3 V,FT_D10,U6 DATA_10 (pin 52),
+36,IOB30B/GCLKC_4,4,3.3 V,FT_D11,U6 DATA_11 (pin 53),
+37,IOB34A,4,3.3 V,FT_D12,U6 DATA_12 (pin 54),
+38,IOB34B,4,3.3 V,FT_D13,U6 DATA_13 (pin 55),
+39,IOB40A,4,3.3 V,FT_D14,U6 DATA_14 (pin 56),
+40,IOB40B,4,3.3 V,FT_D15,U6 DATA_15 (pin 57),
+41,IOB43A,4,3.3 V,FT_TXE_N,U6 TXE_N (pin 8),"FT602 -> FPGA, FIFO has space"
+42,IOB42B,4,3.3 V,FT_WR_N,U6 WR_N (pin 11),FPGA -> FT602 write strobe
+48,IOR49B,3,3.3 V,FT_BE0,U6 BE_0 (pin 4),
+49,IOR49A,3,3.3 V,FT_BE1,U6 BE_1 (pin 5),
+51,IOR45A/RPLL2_T_in,3,3.3 V,FT_BE2,U6 BE_2 (pin 6),
+52,IOR39A/SCLK,3,3.3 V,FT_BE3,U6 BE_3 (pin 7),"SSPI pin: enable ""SSPI as regular IO"""
+53,IOR38B/DOUT/WE_N,3,3.3 V,FT_SCL,U6 SCL (pin 17),"FT602 is I2C master, FPGA is slave (AN_434 map)"
+54,IOR38A/DIN/CLKHOLD_N,3,3.3 V,FT_SDA,U6 SDA (pin 18),"SSPI pin: enable ""SSPI as regular IO"""
+55,IOR36B/SSPI_CS_N/D0,3,3.3 V,FT_INT_N,U6 INT_N (pin 16),"SSPI pin: enable ""SSPI as regular IO"""
+56,IOR36A/SO/D1,3,3.3 V,FT_RESET_N,U6 RESET_N (pin 15),10k pull-up + 100n: FT602 runs even if FPGA blank
+57,IOR35A/FASTRD_N/D3,3,3.3 V,TVP_SDA,U9 SDA (pin 22),FASTRD_N strap: I2C pull-up keeps it high (normal read)
+59,IOR34B/MCLK/D4,3,3.3 V,MSPI_CLK,U5 W25Q64 CLK,"Config flash, 1k pull-down"
+60,IOR34A/MCS_N/D5,3,3.3 V,MSPI_CS_N,U5 W25Q64 /CS,"Config flash, 4.7k pull-up"
+61,IOR33B/MO/D6,3,3.3 V,MSPI_MOSI,U5 W25Q64 DI,Config flash
+62,IOR33A/MI/D7,3,3.3 V,MSPI_MISO,U5 W25Q64 DO,Config flash
+63,IOR29A/GCLKT_3,3,3.3 V,TVP_SCL,U9 SCL (pin 21),FPGA is I2C master for TVP5150
+69,IOT50A,1,3.3 V,FT_D23,U6 DATA_23 (pin 67),
+70,IOT44B,1,3.3 V,FT_D22,U6 DATA_22 (pin 66),
+71,IOT44A,1,3.3 V,FT_D21,U6 DATA_21 (pin 65),
+72,IOT40B,1,3.3 V,FT_D20,U6 DATA_20 (pin 64),
+73,IOT40A,1,3.3 V,FT_D19,U6 DATA_19 (pin 63),
+74,IOT34B,1,3.3 V,FT_D18,U6 DATA_18 (pin 62),
+75,IOT34A,1,3.3 V,FT_D17,U6 DATA_17 (pin 61),
+76,IOT30B/GCLKC_1,1,3.3 V,FT_D16,U6 DATA_16 (pin 60),
+77,IOT30A/GCLKT_1,1,3.3 V,FT_CLK,U6 CLK (pin 58) via 33R,"100 MHz FIFO clock, global clock pin"
+79,IOT27B/GCLKC_0,0,3.3 V,FT_D24,U6 DATA_24 (pin 69),
+80,IOT27A/GCLKT_0,0,3.3 V,FT_D25,U6 DATA_25 (pin 70),
+81,IOT17B,0,3.3 V,FT_D26,U6 DATA_26 (pin 71),
+82,IOT17A,0,3.3 V,FT_D27,U6 DATA_27 (pin 72),
+83,IOT6B,0,3.3 V,FT_D28,U6 DATA_28 (pin 73),
+84,IOT6A,0,3.3 V,FT_D29,U6 DATA_29 (pin 74),
+85,IOT4B,0,3.3 V,FT_D30,U6 DATA_30 (pin 75),
+86,IOT4A,0,3.3 V,FT_D31,U6 DATA_31 (pin 76),
+87,IOR30B/MODE1,3,3.3 V,LED_STATUS,status LED (330R),MODE1 strap: 1k pull-down (as Tang Nano 20K)
+88,IOR30A/MODE0,3,3.3 V,TVP_RESETB,U9 RESETB (pin 8),MODE0 strap: 1k pull-down holds TVP in reset during config
+1,VCC,-,-,+1V0,power,
+2,VSS,-,-,GND,power,
+3,VCCX/VCCIO2/6/7,-,-,+3V3,power,
+12,VCCX/VCCIO2/6/7,-,-,+3V3,power,
+14,VCCPLLL1,-,-,VCCPLLL,power,
+21,VSS,-,-,GND,power,
+22,VCC,-,-,+1V0,power,
+23,VCCIO5,-,-,+3V3,power,
+24,VSS,-,-,GND,power,
+43,VSS,-,-,GND,power,
+44,VCCIO4,-,-,+3V3,power,
+45,VCC,-,-,+1V0,power,
+46,VSS,-,-,GND,power,
+47,EXTR,-,-,FPGA_EXTR,power,
+50,VCCPLLR1,-,-,VCCPLLR,power,
+58,VCCIO3,-,-,+3V3,power,
+64,VCCX/VCCIO2/6/7,-,-,+3V3,power,
+65,VSS,-,-,GND,power,
+66,VCC,-,-,+1V0,power,
+67,VCCIO1,-,-,+3V3,power,
+68,VSS,-,-,GND,power,
+78,VCCIO0,-,-,+3V3,power,
+89,EPAD,-,-,GND,power,
